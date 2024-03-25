@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class CharacterMoveAbility : MonoBehaviour
 {
+
     private CharacterController _characterController;
     private Animator _animator;
 
