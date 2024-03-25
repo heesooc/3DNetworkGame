@@ -17047,6 +17047,7 @@ GameObject:
   - component: {fileID: 4360924265053865608}
   - component: {fileID: 4360924265053865607}
   - component: {fileID: 4360924265053865610}
+  - component: {fileID: 4360924265053865611}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -17301,7 +17302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraRoot: {fileID: 703629855}
-  RotationSpeed: 200
 --- !u!114 &4360924265053865608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17314,7 +17314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77fcb034cff2f7b4281dca03b67739c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
 --- !u!143 &4360924265053865609
 CharacterController:
   m_ObjectHideFlags: 0
@@ -17353,7 +17352,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b8f3bd21a914745900e6cea44f4a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolTime: 1
+--- !u!114 &4360924265053865611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3478032709311209223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea453e7a382b0c43b215e5200309130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stat:
+    Health: 100
+    MoveSpeed: 7
+    RotationSpeed: 200
+    AttackCoolTime: 1
 --- !u!1001 &4360924265361720436
 PrefabInstance:
   m_ObjectHideFlags: 0
