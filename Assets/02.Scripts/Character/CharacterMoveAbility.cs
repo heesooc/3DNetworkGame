@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -26,6 +27,11 @@ public class CharacterMoveAbility : CharacterAbility
 
     private void Update()
     {
+        if(!Owner.PhotonView.IsMine)
+        {
+            return;
+        }
+
         // 순서
         // 1. 사용자의 키보드 입력을 받는다.
         float h = Input.GetAxisRaw("Horizontal");

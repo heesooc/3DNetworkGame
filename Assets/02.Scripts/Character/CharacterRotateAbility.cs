@@ -1,7 +1,9 @@
 using Cinemachine;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class CharacterRotateAbility : CharacterAbility
 {
@@ -16,11 +18,19 @@ public class CharacterRotateAbility : CharacterAbility
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
-        GameObject.FindWithTag("FollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = CameraRoot;
+        if (Owner.PhotonView.IsMine)
+        {
+            GameObject.FindWithTag("FollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = CameraRoot;
+        }
     }
 
     private void Update()
     {
+        if (!Owner.PhotonView.IsMine)
+        {
+            return;
+        }
+
         // 순서:
         // 1. 마우스 입력 값을 받는다.
         float mouseX = Input.GetAxis("Mouse X");

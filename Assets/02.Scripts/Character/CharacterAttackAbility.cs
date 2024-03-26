@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 [RequireComponent(typeof(Animator))]
 
@@ -25,6 +26,11 @@ public class CharacterAttackAbility : CharacterAbility
 
     private void Update()
     {
+        if (!Owner.PhotonView.IsMine)
+        {
+            return;
+        }
+
         _attackTimer += Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0) && _attackTimer > Owner.Stat.AttackCoolTime)
