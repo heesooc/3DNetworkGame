@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class CharacterRotateAbility : CharacterAbility
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+
+        GameObject.FindWithTag("FollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = CameraRoot;
     }
 
     private void Update()

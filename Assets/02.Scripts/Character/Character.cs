@@ -13,5 +13,8 @@ public class Character : MonoBehaviour
     private void Start()
     {
         Stat.Init();
+
+        UI_CharacterStat.Instance.MyCharacter = this;
+        
     }
 }

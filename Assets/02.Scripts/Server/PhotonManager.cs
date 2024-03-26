@@ -69,19 +69,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
        // PhotonNetwork.JoinRandomOrCreateRoom(); // 랜덤한 방에 들어가거나 없다면 만드는 것
     }
 
-
-   /* public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log("OnJoinRandomFailed!");
-        Debug.Log(message);
-    }
-
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("OnJoinRoomFailed!");
-        Debug.Log(message);
-    }*/
-
     // 방 생성에 성공했을 때 호출되는 콜백 함수
     public override void OnCreatedRoom()
     {
@@ -89,19 +76,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
     }
 
-   /* // 방 생성에 실패했을 때 호출되는 콜백 함수
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("방 생성 실패!");
-        Debug.Log(message);
-    }*/
-
-
     public override void OnJoinedRoom()
     {
         Debug.Log("방 입장 성공!");
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"PlayerCount: {PhotonNetwork.CurrentRoom.PlayerCount}");
         Debug.Log($"MaxCount: {PhotonNetwork.CurrentRoom.MaxPlayers}");
+
+        PhotonNetwork.Instantiate("Character", Vector3.zero, Quaternion.identity);
     }
+
 }
