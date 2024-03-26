@@ -10,4 +10,8 @@ public class Character : MonoBehaviour
 {
     public Stat Stat;
 
+    private void Start()
+    {
+        Stat.Init();
+    }
 }

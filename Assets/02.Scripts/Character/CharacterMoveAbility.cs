@@ -16,10 +16,12 @@ public class CharacterMoveAbility : CharacterAbility
     private float VerticalSpeed = 0f;
     private float _gravity = -9.8f;
 
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -34,10 +36,9 @@ public class CharacterMoveAbility : CharacterAbility
         dir.Normalize();
         dir = Camera.main.transform.TransformDirection(dir);
 
-
         _animator.SetFloat("Move", dir.magnitude);
 
-        // 4. 중력 적용하세요.
+        // 3. 중력 적용하세요.
         if (!_characterController.isGrounded)
         {
             VerticalSpeed += _gravity * Time.deltaTime;
@@ -48,10 +49,33 @@ public class CharacterMoveAbility : CharacterAbility
         }
 
 
-        // 3. 이동속도에 따라 그 방향으로 이동한다. 
-        dir.y = VerticalSpeed;
-        _characterController.Move(dir * Owner.Stat.MoveSpeed * Time.deltaTime);
+        float speed = Owner.Stat.MoveSpeed;
 
+        if (Input.GetKey(KeyCode.LeftShift) && Owner.Stat.Stamina > 0)
+        {
+            speed = Owner.Stat.RunSpeed;
+            Owner.Stat.Stamina -= Time.deltaTime * Owner.Stat.RunConsumeStamina;
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            Owner.Stat.Stamina -= Owner.Stat.AttackConsumeStamina;
+        }
+        else
+        {
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                Owner.Stat.Stamina += Time.deltaTime * Owner.Stat.RecoveryStamina;
+            }
+
+            speed = Owner.Stat.MoveSpeed;
+        }
+
+        Owner.Stat.Stamina = Mathf.Clamp(Owner.Stat.Stamina, 0, Owner.Stat.MaxStamina);
+
+
+        // 4. 이동속도에 따라 그 방향으로 이동한다. 
+        dir.y = VerticalSpeed;
+        _characterController.Move(dir * speed * Time.deltaTime);
 
     }
 }
