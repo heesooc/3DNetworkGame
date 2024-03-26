@@ -24,6 +24,18 @@ public class Character : MonoBehaviour, IPunObservable // 인터페이스(약속
         }
     }
 
+    private Vector3 _recivedPosition;
+    private Quaternion _recivedRotation;
+
+    private void Update()
+    {
+        if (!PhotonView.IsMine)
+        {
+            transform.position = Vector3.Lerp(transform.position, _recivedPosition, Time.deltaTime * 20f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, _recivedRotation, Time.deltaTime * 20f);
+        }
+    }
+
     // 데이터 동기화를 위해 데이터 전송 및 수신 기능을 가진 약속
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     { 
@@ -36,15 +48,9 @@ public class Character : MonoBehaviour, IPunObservable // 인터페이스(약속
         else if(stream.IsReading)   // 데이터를 수신하는 상황
         {
             // 데이터를 전송한 순서와 똑같이 받은 데이터를 캐스팅해야된다.
-            Vector3 recivedPosition = (Vector3)stream.ReceiveNext();
-            Quaternion recivedRotation = (Quaternion)stream.ReceiveNext();
+            _recivedPosition = (Vector3)stream.ReceiveNext();
+            _recivedRotation = (Quaternion)stream.ReceiveNext();
 
-            if (!PhotonView.IsMine)
-            {
-                transform.position = recivedPosition;
-                transform.rotation = recivedRotation;
-            }
-            
         }
         // info는 송수신 성공/실패 여부에 대한 메시지 담겨있다. 
     }
