@@ -20,6 +20,8 @@ public class CharacterAttackAbility : CharacterAbility
     private Animator _animator;
     private float _attackTimer = 0;
 
+    public Collider WeaponCollider;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -71,6 +73,15 @@ public class CharacterAttackAbility : CharacterAbility
             }
             // damagedAbleObject.Damaged(Owner.Stat.Damage);
         }
-        
     }
+
+    public void ActiveCollider()
+    {
+        WeaponCollider.enabled = true;
+    }
+    public void InActiveCollider()
+    {
+        WeaponCollider.enabled = false;
+    }
+
 }
