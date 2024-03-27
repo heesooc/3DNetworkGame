@@ -9,6 +9,7 @@ public class Stat
 {
     public int Health;
     public int MaxHealth;
+    public int Damage;
 
     public float Stamina;
     public float MaxStamina;

@@ -51,4 +51,26 @@ public class CharacterAttackAbility : CharacterAbility
     {
         _animator.SetTrigger($"Attack0{index}");
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(Owner.PhotonView.IsMine == false || other.transform == transform)
+        {
+            return;
+        }
+        // O: 개방 폐쇄 원칙 + 인터페이스
+        // 수정에는 닫혀있고, 확장에는 열려있다.
+        IDamaged damagedAbleObject = other.GetComponent<IDamaged>();
+        
+        if (damagedAbleObject != null)
+        {
+            PhotonView photonView = other.GetComponent<PhotonView>();
+            if (photonView != null)
+            {
+                photonView.RPC("Damaged", RpcTarget.All, Owner.Stat.Damage);
+            }
+            // damagedAbleObject.Damaged(Owner.Stat.Damage);
+        }
+        
+    }
 }
