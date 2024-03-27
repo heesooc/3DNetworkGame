@@ -87,7 +87,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         Debug.Log($"PlayerCount: {PhotonNetwork.CurrentRoom.PlayerCount}");
         Debug.Log($"MaxCount: {PhotonNetwork.CurrentRoom.MaxPlayers}");
 
-        PhotonNetwork.Instantiate("Character", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
     }
 
 }

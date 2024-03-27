@@ -32,8 +32,8 @@ public class Character : MonoBehaviour, IPunObservable // 인터페이스(약속
     {
         if (!PhotonView.IsMine)
         {
-            transform.position = Vector3.Lerp(transform.position, _recivedPosition, Time.deltaTime * 20f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, _recivedRotation, Time.deltaTime * 20f);
+            //transform.position = Vector3.Lerp(transform.position, _recivedPosition, Time.deltaTime * 20f);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, _recivedRotation, Time.deltaTime * 20f);
         }
     }
 
