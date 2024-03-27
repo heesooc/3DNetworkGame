@@ -8,6 +8,6 @@ public abstract class CharacterAbility : MonoBehaviour // abstract: 추상 클�
 
     private void Awake()
     {
-        Owner = GetComponent<Character>();
+        Owner = GetComponentInParent<Character>();
     }
 }
