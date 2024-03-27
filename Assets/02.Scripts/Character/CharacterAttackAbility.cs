@@ -22,6 +22,10 @@ public class CharacterAttackAbility : CharacterAbility
 
     public Collider WeaponCollider;
 
+    // 때린 애들을 기억해 놓는 리스트
+    private List<IDamaged> _damagedList = new List<IDamaged>();
+
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -66,6 +70,14 @@ public class CharacterAttackAbility : CharacterAbility
         
         if (damagedAbleObject != null)
         {
+            // 내가 이미 때렸던 애라면 안때리겠다..(2번 따닥 타격 안가도록)
+            if(_damagedList.Contains(damagedAbleObject)) 
+            {
+                return; 
+            }
+            // 안 맞은 애면 때린 리스트에 추가
+            _damagedList.Add(damagedAbleObject);
+
             PhotonView photonView = other.GetComponent<PhotonView>();
             if (photonView != null)
             {
@@ -82,6 +94,7 @@ public class CharacterAttackAbility : CharacterAbility
     public void InActiveCollider()
     {
         WeaponCollider.enabled = false;
+        _damagedList.Clear();
     }
 
 }

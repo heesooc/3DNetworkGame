@@ -21,6 +21,14 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         if (PhotonView.IsMine)
         {
             UI_CharacterStat.Instance.MyCharacter = this;
+
+            MinimapCamera minimapCamera = FindObjectOfType<MinimapCamera>();
+
+            // 미니맵 카메라의 타겟으로 이 플레이어 설정
+            if (minimapCamera != null)
+            {
+                minimapCamera.SetTarget(transform);
+            }
         }
     }
 
