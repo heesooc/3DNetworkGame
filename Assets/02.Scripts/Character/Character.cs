@@ -1,3 +1,4 @@
+using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,5 +73,19 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     {
         Stat.Health -= damage;
 
+        if(PhotonView.IsMine) 
+        {
+            // 카메라 흔들기 위해 Impulse를 발생시킨다.
+            CinemachineImpulseSource impulseSource;
+            if (TryGetComponent<CinemachineImpulseSource>(out impulseSource))
+            {
+                float strength = 0.2f;
+                impulseSource.GenerateImpulseWithVelocity(Random.insideUnitSphere.normalized * strength);
+            }
+
+            UI_DamagedEffect.Instance.Show(0.4f);
+        }
+
+        
     }
 }
