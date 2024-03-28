@@ -81,6 +81,9 @@ public class CharacterAttackAbility : CharacterAbility
             PhotonView photonView = other.GetComponent<PhotonView>();
             if (photonView != null)
             {
+                // 피격 이펙트 생성
+                Vector3 hitPosition = (transform.position + other.transform.position) / 2f + new Vector3(0f, 1f);
+                PhotonNetwork.Instantiate("HitEffect", hitPosition, Quaternion.identity);
                 photonView.RPC("Damaged", RpcTarget.All, Owner.Stat.Damage);
             }
             // damagedAbleObject.Damaged(Owner.Stat.Damage);
@@ -90,6 +93,7 @@ public class CharacterAttackAbility : CharacterAbility
     public void ActiveCollider()
     {
         WeaponCollider.enabled = true;
+
     }
     public void InActiveCollider()
     {

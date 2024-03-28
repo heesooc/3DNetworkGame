@@ -71,5 +71,6 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     public void Damaged(int damage)
     {
         Stat.Health -= damage;
+
     }
 }

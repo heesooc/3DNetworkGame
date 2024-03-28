@@ -29,12 +29,13 @@ public class MinimapCamera : MonoBehaviour
 
         transform.position = targetPosition;
 
-       /* Vector3 targetEulerAngles = _target.eulerAngles;
-        targetEulerAngles.x = _initialEulerAngles.x;
-        targetEulerAngles.z = _initialEulerAngles.z;
+        /* Vector3 targetEulerAngles = _target.eulerAngles;
+         targetEulerAngles.x = _initialEulerAngles.x;
+         targetEulerAngles.z = _initialEulerAngles.z;
 
-        transform.eulerAngles = targetEulerAngles;*/
+         transform.eulerAngles = targetEulerAngles;*/
 
-
+        Vector3 targetEulerAngles = new Vector3(90f, _target.eulerAngles.y, 0f);
+        transform.eulerAngles = targetEulerAngles;
     }
 }
