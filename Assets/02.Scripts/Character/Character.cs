@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterMoveAbility))]
 [RequireComponent(typeof(CharacterRotateAbility))]
 [RequireComponent(typeof(CharacterAttackAbility))]
+[RequireComponent(typeof(CharacterShakeAbility))]
 
 public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이스(약속)
 {
@@ -73,7 +74,9 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     {
         Stat.Health -= damage;
 
-        if(PhotonView.IsMine) 
+        GetComponent<CharacterShakeAbility>().Shake();
+
+        if (PhotonView.IsMine) 
         {
             // 카메라 흔들기 위해 Impulse를 발생시킨다.
             CinemachineImpulseSource impulseSource;
@@ -82,10 +85,8 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
                 float strength = 0.2f;
                 impulseSource.GenerateImpulseWithVelocity(Random.insideUnitSphere.normalized * strength);
             }
-
+            
             UI_DamagedEffect.Instance.Show(0.4f);
         }
-
-        
     }
 }
