@@ -40,7 +40,7 @@ public class CampFire : MonoBehaviour
         if (_timer > Cooltime)
         {
             _timer = 0f;
-            _target.Damaged(Damage);
+            _target.Damaged(Damage, -1);
         }
 
     }
