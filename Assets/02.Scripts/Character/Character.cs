@@ -2,24 +2,32 @@ using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterMoveAbility))]
 [RequireComponent(typeof(CharacterRotateAbility))]
 [RequireComponent(typeof(CharacterAttackAbility))]
 [RequireComponent(typeof(CharacterShakeAbility))]
+[RequireComponent(typeof(Animator))]
 
 public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이스(약속)
 {
     public PhotonView PhotonView {  get; private set; } 
 
     public Stat Stat;
+    public State State { get; private set; } = State.Live;
+    private Animator _animator;
+
+    private Vector3 _recivedPosition;
+    private Quaternion _recivedRotation;
 
     private void Awake()
     {
         Stat.Init();
         PhotonView = GetComponent<PhotonView>();
-        
+        _animator = GetComponent<Animator>();
+
         if (PhotonView.IsMine)
         {
             UI_CharacterStat.Instance.MyCharacter = this;
@@ -34,9 +42,10 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         }
     }
 
-    private Vector3 _recivedPosition;
-    private Quaternion _recivedRotation;
-
+    private void Start()
+    {
+        SetRandomPositionAndRotation();
+    }
 
     private void Update()
     {
@@ -45,6 +54,11 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
             //transform.position = Vector3.Lerp(transform.position, _recivedPosition, Time.deltaTime * 20f);
             //transform.rotation = Quaternion.Slerp(transform.rotation, _recivedRotation, Time.deltaTime * 20f);
         }
+
+        /*if (transform.position.y < -20) // 예시로 -20을 사용
+        {
+            StartCoroutine(Death_Coroutine());
+        }*/
     }
 
     // 데이터 동기화를 위해 데이터 전송 및 수신 기능을 가진 약속
@@ -72,21 +86,77 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     [PunRPC]
     public void Damaged(int damage)
     {
+        if(State == State.Death)
+        {
+            return;
+        }
         Stat.Health -= damage;
+        if (Stat.Health <= 0)
+        {
+            State = State.Death;
+            /* Death();*/
+            PhotonView.RPC(nameof(Death), RpcTarget.All); // Death 함수를 호출
+        }
 
         GetComponent<CharacterShakeAbility>().Shake();
 
+
         if (PhotonView.IsMine) 
         {
-            // 카메라 흔들기 위해 Impulse를 발생시킨다.
-            CinemachineImpulseSource impulseSource;
-            if (TryGetComponent<CinemachineImpulseSource>(out impulseSource))
-            {
-                float strength = 0.2f;
-                impulseSource.GenerateImpulseWithVelocity(Random.insideUnitSphere.normalized * strength);
-            }
-            
-            UI_DamagedEffect.Instance.Show(0.4f);
+            OnDamagedMine(); 
+           
         }
+    }
+
+    private void OnDamagedMine()
+    {
+        // 카메라 흔들기 위해 Impulse를 발생시킨다.
+        CinemachineImpulseSource impulseSource;
+        if (TryGetComponent<CinemachineImpulseSource>(out impulseSource))
+        {
+            float strength = 0.2f;
+            impulseSource.GenerateImpulseWithVelocity(Random.insideUnitSphere.normalized * strength);
+        }
+
+        UI_DamagedEffect.Instance.Show(0.4f);
+    }
+
+    [PunRPC]
+    private void Death()
+    {
+        State = State.Death;
+
+        GetComponent<Animator>().SetTrigger($"Die");
+        GetComponent<CharacterAttackAbility>().InActiveCollider();
+
+        // 죽고나서 5초후 리스폰
+        if(PhotonView.IsMine)
+        {
+            StartCoroutine(Death_Coroutine());
+        }
+    }
+
+    private IEnumerator Death_Coroutine()
+    {
+        yield return new WaitForSeconds(5f);
+
+        PhotonView.RPC(nameof(Live), RpcTarget.All);
+
+        SetRandomPositionAndRotation();
+    }
+
+    private void SetRandomPositionAndRotation()
+    {
+        Vector3 spawnPoint = BattleScene.Instance.GetRandomSpawnPoint();
+        GetComponent<CharacterMoveAbility>().Teleport(spawnPoint);
+        GetComponent<CharacterRotateAbility>().SetRandomRotation();
+    }
+
+    [PunRPC]
+    private void Live()
+    {
+        State = State.Live;
+        Stat.Init();
+        GetComponent<Animator>().SetTrigger("Live");
     }
 }

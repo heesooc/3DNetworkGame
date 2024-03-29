@@ -27,7 +27,7 @@ public class CharacterMoveAbility : CharacterAbility
 
     private void Update()
     {
-        if(!Owner.PhotonView.IsMine)
+        if(Owner.State == State.Death || !Owner.PhotonView.IsMine)
         {
             return;
         }
@@ -54,7 +54,7 @@ public class CharacterMoveAbility : CharacterAbility
             VerticalSpeed = 0; // 지면에 닿아 있을 경우 수직 속도를 0으로 리셋
         }
 
-
+        // 스태미나
         float speed = Owner.Stat.MoveSpeed;
 
         if (Input.GetKey(KeyCode.LeftShift) && Owner.Stat.Stamina > 0)
@@ -82,6 +82,14 @@ public class CharacterMoveAbility : CharacterAbility
         // 4. 이동속도에 따라 그 방향으로 이동한다. 
         dir.y = VerticalSpeed;
         _characterController.Move(dir * speed * Time.deltaTime);
+    }
 
+    public void Teleport(Vector3 position)
+    {
+        _characterController.enabled = false;
+
+        transform.position = position;
+
+        _characterController.enabled = true;
     }
 }

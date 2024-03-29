@@ -26,7 +26,7 @@ public class CharacterRotateAbility : CharacterAbility
 
     private void Update()
     {
-        if (!Owner.PhotonView.IsMine)
+        if (Owner.State == State.Death || !Owner.PhotonView.IsMine)
         {
             return;
         }
@@ -48,5 +48,11 @@ public class CharacterRotateAbility : CharacterAbility
 
         // 4. 시네머신- virtual 카메라
 
+    }
+
+    public void SetRandomRotation()
+    {
+        _mx = Random.Range(0, 360);
+        _my = 0;
     }
 }

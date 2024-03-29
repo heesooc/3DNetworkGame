@@ -4,6 +4,7 @@ using UnityEngine;
 // Photon API를 사용하기 위한 네임스페이스
 using Photon.Pun;
 using Photon.Realtime;
+using Random = UnityEngine.Random;
 
 // 역할: 포톤 서버 연결 관리자
 
@@ -89,5 +90,4 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
 
         PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
     }
-
 }
