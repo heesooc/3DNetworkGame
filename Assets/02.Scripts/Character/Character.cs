@@ -140,9 +140,8 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     {
         yield return new WaitForSeconds(5f);
 
-        PhotonView.RPC(nameof(Live), RpcTarget.All);
-
         SetRandomPositionAndRotation();
+        PhotonView.RPC(nameof(Live), RpcTarget.All);
     }
 
     private void SetRandomPositionAndRotation()
