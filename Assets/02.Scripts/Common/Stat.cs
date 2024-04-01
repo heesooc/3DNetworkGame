@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 [Serializable] // 데이터 직렬화, MonoBehaviour 안씀
 
@@ -23,6 +24,11 @@ public class Stat
 
     public float AttackCoolTime;
     public float AttackConsumeStamina;
+
+    public float JumpPower;
+    public int JumpMaxCount;
+    public int JumpRemainCount;
+    public float JumpConsumeStamina;
 
     public void Init()
     {

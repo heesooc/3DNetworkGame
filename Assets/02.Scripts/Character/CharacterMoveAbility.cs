@@ -9,12 +9,14 @@ using UnityEngine;
 
 public class CharacterMoveAbility : CharacterAbility
 {
+    public bool IsJumping => !_characterController.isGrounded;
+
     // 목표: [W], [A], [S], [D] 및 방향키를 누르면 캐릭터를 그 방향으로 이동시키고 싶다.
 
     private CharacterController _characterController;
     private Animator _animator;
 
-    private float VerticalSpeed = 0f;
+    private float _yVelocity = 0f;
     private float _gravity = -9.8f;
 
 
@@ -45,16 +47,11 @@ public class CharacterMoveAbility : CharacterAbility
         _animator.SetFloat("Move", dir.magnitude);
 
         // 3. 중력 적용하세요.
-        if (!_characterController.isGrounded)
-        {
-            VerticalSpeed += _gravity * Time.deltaTime;
-        }
-        else
-        {
-            VerticalSpeed = 0; // 지면에 닿아 있을 경우 수직 속도를 0으로 리셋
-        }
+        _yVelocity += _gravity * Time.deltaTime;
+        dir.y = _yVelocity;
 
-        // 스태미나
+
+        // 스태미나 적용
         float speed = Owner.Stat.MoveSpeed;
 
         if (Input.GetKey(KeyCode.LeftShift) && Owner.Stat.Stamina > 0)
@@ -62,17 +59,13 @@ public class CharacterMoveAbility : CharacterAbility
             speed = Owner.Stat.RunSpeed;
             Owner.Stat.Stamina -= Time.deltaTime * Owner.Stat.RunConsumeStamina;
         }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            Owner.Stat.Stamina -= Owner.Stat.AttackConsumeStamina;
-        }
         else
         {
-            if (!Input.GetKey(KeyCode.LeftShift))
-            {
-                Owner.Stat.Stamina += Time.deltaTime * Owner.Stat.RecoveryStamina;
-            }
+            Owner.Stat.Stamina += Time.deltaTime * Owner.Stat.RecoveryStamina;
+        }
 
+        if (Owner.Stat.Stamina <= 0)
+        {
             speed = Owner.Stat.MoveSpeed;
         }
 
@@ -80,8 +73,19 @@ public class CharacterMoveAbility : CharacterAbility
 
 
         // 4. 이동속도에 따라 그 방향으로 이동한다. 
-        dir.y = VerticalSpeed;
+
         _characterController.Move(dir * speed * Time.deltaTime);
+
+        // 5. 점프 적용하기
+        bool haveJumpStamina = Owner.Stat.Stamina >= Owner.Stat.JumpConsumeStamina;
+        if (haveJumpStamina && Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded) //&& (Owner.Stat.JumpRemainCount > 0)
+        {
+            /*Debug.Log("점프");
+            Owner.Stat.JumpRemainCount--;*/
+
+            Owner.Stat.Stamina -= Owner.Stat.JumpConsumeStamina;
+            _yVelocity = Owner.Stat.JumpPower;
+        }
     }
 
     public void Teleport(Vector3 position)

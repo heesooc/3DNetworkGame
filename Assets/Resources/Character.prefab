@@ -2073,13 +2073,17 @@ MonoBehaviour:
     Damage: 20
     Stamina: 100
     MaxStamina: 100
-    RunConsumeStamina: 10
-    RecoveryStamina: 5
-    MoveSpeed: 7
-    RunSpeed: 10
+    RunConsumeStamina: 5
+    RecoveryStamina: 7
+    MoveSpeed: 5
+    RunSpeed: 15
     RotationSpeed: 200
     AttackCoolTime: 1
-    AttackConsumeStamina: 20
+    AttackConsumeStamina: 10
+    JumpPower: 3
+    JumpMaxCount: 2
+    JumpRemainCount: 2
+    JumpConsumeStamina: 10
 --- !u!114 &4745756571476370824
 MonoBehaviour:
   m_ObjectHideFlags: 0
