@@ -64,11 +64,6 @@ public class CharacterMoveAbility : CharacterAbility
             Owner.Stat.Stamina += Time.deltaTime * Owner.Stat.RecoveryStamina;
         }
 
-        if (Owner.Stat.Stamina <= 0)
-        {
-            speed = Owner.Stat.MoveSpeed;
-        }
-
         Owner.Stat.Stamina = Mathf.Clamp(Owner.Stat.Stamina, 0, Owner.Stat.MaxStamina);
 
 
