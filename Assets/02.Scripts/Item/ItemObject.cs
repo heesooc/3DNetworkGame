@@ -35,6 +35,8 @@ public class ItemObject : MonoBehaviourPun // Pun씀
             {
                 return;
             }
+
+            character.GetComponent<CharacterEffectAbility>().RequestPlay((int)ItemType);
                         
             switch(ItemType)
             {
