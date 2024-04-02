@@ -17,7 +17,7 @@ public class ItemObject : MonoBehaviourPun // Pun씀
         if (other.CompareTag("Player"))
         {
             Character character = other.GetComponent<Character>();
-            if(character.State == State.Death)
+            if(!character.PhotonView.IsMine || character.State == State.Death)
             {
                 return;
             }

@@ -54,10 +54,17 @@ public class CharacterMoveAbility : CharacterAbility
         // 스태미나 적용
         float speed = Owner.Stat.MoveSpeed;
 
-        if (Input.GetKey(KeyCode.LeftShift) && Owner.Stat.Stamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = Owner.Stat.RunSpeed;
-            Owner.Stat.Stamina -= Time.deltaTime * Owner.Stat.RunConsumeStamina;
+            if(Owner.Stat.Stamina > 0)
+            {
+                speed = Owner.Stat.RunSpeed;
+                Owner.Stat.Stamina -= Time.deltaTime * Owner.Stat.RunConsumeStamina;
+            }
+            else
+            {
+                speed = Owner.Stat.MoveSpeed;
+            }
         }
         else
         {
