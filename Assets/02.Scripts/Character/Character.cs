@@ -163,16 +163,32 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         // 죽고나서 5초후 리스폰
         if(PhotonView.IsMine)
         {
-            // 팩토리패턴: 객체 생성과 사용 로직을 분리해서 캡슐화하는 패턴
-            /*ItemObjectFactory.Instance.RequestCreate(ItemType.HealthPotion, transform.position);
-            ItemObjectFactory.Instance.RequestCreate(ItemType.StaminaPotion, transform.position);
-            ItemObjectFactory.Instance.RequestCreate(ItemType.ScorePotion, transform.position);*/
-            ItemObjectFactory.Instance.CreatePercent(transform.position);
-
+            DropItems();
             StartCoroutine(Death_Coroutine());
         }
     }
 
+    private void DropItems()
+    {
+        // 팩토리패턴: 객체 생성과 사용 로직을 분리해서 캡슐화하는 패턴
+        int randomValue = UnityEngine.Random.Range(0, 100);
+        if (randomValue > 30)      // 70%
+        {
+            int randomCount = UnityEngine.Random.Range(10, 30);
+            for (int i = 0; i < randomCount; ++i)
+            {
+                ItemObjectFactory.Instance.RequestCreate(ItemType.ScorePotion, transform.position);
+            }
+        }
+        else if (randomValue > 10)  // 20%
+        {
+            ItemObjectFactory.Instance.RequestCreate(ItemType.HealthPotion, transform.position);
+        }
+        else                        // 10%
+        {
+            ItemObjectFactory.Instance.RequestCreate(ItemType.StaminaPotion, transform.position);
+        }
+    }
 
     private IEnumerator Death_Coroutine()
     {

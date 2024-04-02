@@ -12,6 +12,20 @@ public class ItemObject : MonoBehaviourPun // Pun씀
     public ItemType ItemType;
     public float Value = 100;
 
+    private void Start()
+    {
+        if(photonView.IsMine)
+        {
+            Rigidbody rigidbody = GetComponent<Rigidbody>();
+            Vector3 randomVector = Random.insideUnitSphere;
+            randomVector.y = 1f;
+            randomVector.Normalize();
+            randomVector *= Random.Range(5, 10f);
+            rigidbody.AddForce(randomVector, ForceMode.Impulse);
+
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -45,7 +59,7 @@ public class ItemObject : MonoBehaviourPun // Pun씀
                 }
                 case ItemType.ScorePotion:
                     {
-                        character.Score += 1;
+                        character.Score += Value;
                         break;
                     }
             }
