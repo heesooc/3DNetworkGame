@@ -20,9 +20,9 @@ public class ItemObject : MonoBehaviourPun // Pun씀
             Vector3 randomVector = Random.insideUnitSphere;
             randomVector.y = 1f;
             randomVector.Normalize();
-            randomVector *= Random.Range(5, 10f);
+            randomVector *= Random.Range(3, 7f);
             rigidbody.AddForce(randomVector, ForceMode.Impulse);
-
+            rigidbody.AddTorque(randomVector, ForceMode.Impulse);
         }
     }
 

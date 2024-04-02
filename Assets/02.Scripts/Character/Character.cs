@@ -174,6 +174,7 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         int randomValue = UnityEngine.Random.Range(0, 100);
         if (randomValue > 30)      // 70%
         {
+            Debug.Log(randomValue);
             int randomCount = UnityEngine.Random.Range(10, 30);
             for (int i = 0; i < randomCount; ++i)
             {
@@ -182,10 +183,12 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         }
         else if (randomValue > 10)  // 20%
         {
+            Debug.Log(randomValue);
             ItemObjectFactory.Instance.RequestCreate(ItemType.HealthPotion, transform.position);
         }
         else                        // 10%
         {
+            Debug.Log(randomValue);
             ItemObjectFactory.Instance.RequestCreate(ItemType.StaminaPotion, transform.position);
         }
     }
