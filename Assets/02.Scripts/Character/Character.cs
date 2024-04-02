@@ -22,6 +22,8 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     private Vector3 _recivedPosition;
     private Quaternion _recivedRotation;
 
+    public float Score;
+
     private void Awake()
     {
         Stat.Init();
@@ -162,8 +164,10 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         if(PhotonView.IsMine)
         {
             // 팩토리패턴: 객체 생성과 사용 로직을 분리해서 캡슐화하는 패턴
-            ItemObjectFactory.Instance.RequestCreate(ItemType.HealthPotion, transform.position);
+            /*ItemObjectFactory.Instance.RequestCreate(ItemType.HealthPotion, transform.position);
             ItemObjectFactory.Instance.RequestCreate(ItemType.StaminaPotion, transform.position);
+            ItemObjectFactory.Instance.RequestCreate(ItemType.ScorePotion, transform.position);*/
+            ItemObjectFactory.Instance.CreatePercent(transform.position);
 
             StartCoroutine(Death_Coroutine());
         }

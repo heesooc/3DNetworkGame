@@ -43,6 +43,11 @@ public class ItemObject : MonoBehaviourPun // Pun씀
                         }
                         break;
                 }
+                case ItemType.ScorePotion:
+                    {
+                        character.Score += 1;
+                        break;
+                    }
             }
             gameObject.SetActive(false); // 시간차가 있어서 써줌
             ItemObjectFactory.Instance.RequestDelete(photonView.ViewID);

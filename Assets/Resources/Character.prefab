@@ -2084,6 +2084,7 @@ MonoBehaviour:
     JumpMaxCount: 2
     JumpRemainCount: 2
     JumpConsumeStamina: 10
+  Score: 0
 --- !u!114 &4745756571476370824
 MonoBehaviour:
   m_ObjectHideFlags: 0
