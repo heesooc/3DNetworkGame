@@ -74,6 +74,7 @@ public class UI_RoomInfo : MonoBehaviourPunCallbacks
     public void AddLog(string logMessage)
     {
         _logText += logMessage;
+
         Refresh();
     }
 }

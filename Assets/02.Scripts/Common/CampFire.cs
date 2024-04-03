@@ -31,7 +31,14 @@ public class CampFire : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(_target == null) 
+        Character c = other.GetComponent<Character>();
+        if (_target != null && c != null && c.State == State.Death)
+        {
+            _target = null;
+        }
+        // 데미지 자꾸 먹는 오류 해결함
+
+        if (_target == null) 
         { 
             return; 
         }

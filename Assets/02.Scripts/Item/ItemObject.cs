@@ -26,6 +26,8 @@ public class ItemObject : MonoBehaviourPun // Pun씀
         }
     }
 
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
