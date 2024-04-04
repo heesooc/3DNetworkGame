@@ -1,9 +1,9 @@
 using Cinemachine;
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using ExitGames.Client.Photon;
+using System.Collections;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 [RequireComponent(typeof(CharacterMoveAbility))]
 [RequireComponent(typeof(CharacterRotateAbility))]
@@ -46,8 +46,33 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
 
     private void Start()
     {
+        if(!PhotonView.IsMine)
+        {
+            return;
+        }
         SetRandomPositionAndRotation();
+
+        /*[해쉬테이블] // 효율적인 검색과 삽입 연산을 위해 설계된 자료구조
+         ㄴ int score     = 0;
+         ㄴ int KillCount = 0;
+         ㄴ. 캐릭터.커스텀 프로퍼티 = 해쉬테이블<string, object>*/
+        ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+        hashtable.Add("Score", 0);      // hashtable.Add("키", 값); //여기서 키(string 타입)는 데이터를 식별하는 데 사용되며, 값(object 타입)은 저장하려는 실제 데이터
+        hashtable.Add("KillCount", 0);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable); //현재 로컬 플레이어의 CustomProperties를 방금 만든 hashtable로 설정함
+
     }
+
+    public void AddScore(int score)
+    {
+        // 현재 로컬 플레이어에 할당된 커스텀 프로퍼티들을 담고 있는 해시테이블을 가져옴
+        ExitGames.Client.Photon.Hashtable myHashtable = PhotonNetwork.LocalPlayer.CustomProperties;
+        // 'Score' 키에 해당하는 값을 가져옴 = 형 변환을 통해 object-> int 타입으로 변환 + 현재 점수에 새 점수 더함
+        myHashtable["Score"] = (int)myHashtable["Score"] + score;
+        // 변경된 해시테이블을 다시 플레이어의 커스텀 프로퍼티로 설정
+        PhotonNetwork.LocalPlayer.SetCustomProperties(myHashtable);
+    }
+
 
     private void Update()
     {

@@ -63,7 +63,8 @@ public class ItemObject : MonoBehaviourPun // Pun씀
                 }
                 case ItemType.ScorePotion:
                     {
-                        character.Score += Value;
+                        // character.Score += Value;
+                        character.AddScore((int)Value);
                         break;
                     }
             }

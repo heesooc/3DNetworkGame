@@ -14,9 +14,17 @@ public class UI_PlayerRankingSlot : MonoBehaviour
 
     public void Set(Player player)
     {
-        RankingTextUI.text = "1";
+        RankingTextUI.text = "-";
         NicknameTextUI.text = player.NickName;
-        KillCountTextUI.text = "10";
-        ScoreTextUI.text= "10000";
+        if(player.CustomProperties.ContainsKey("KillCount"))
+        {
+            KillCountTextUI.text = $"{player.CustomProperties["KillCount"]}";
+            ScoreTextUI.text = $"{player.CustomProperties["Score"]}";
+        }
+        else
+        {
+            KillCountTextUI.text = "0";
+            ScoreTextUI.text = "0";
+        }
     }
 }
