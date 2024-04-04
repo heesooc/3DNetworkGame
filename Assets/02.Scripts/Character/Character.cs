@@ -4,6 +4,8 @@ using UnityEngine;
 using ExitGames.Client.Photon;
 using System.Collections;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using UnityEngine.TextCore.Text;
+using Photon.Realtime;
 
 [RequireComponent(typeof(CharacterMoveAbility))]
 [RequireComponent(typeof(CharacterRotateAbility))]
@@ -23,6 +25,7 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
     private Quaternion _recivedRotation;
 
     public float Score;
+    private int _halfScore;
 
     private void Awake()
     {
@@ -63,16 +66,31 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
 
     }
 
-    public void AddScore(int score)
+    [PunRPC]
+    public void AddPropertyIntValue(string key, int value)
     {
         // 현재 로컬 플레이어에 할당된 커스텀 프로퍼티들을 담고 있는 해시테이블을 가져옴
         ExitGames.Client.Photon.Hashtable myHashtable = PhotonNetwork.LocalPlayer.CustomProperties;
         // 'Score' 키에 해당하는 값을 가져옴 = 형 변환을 통해 object-> int 타입으로 변환 + 현재 점수에 새 점수 더함
-        myHashtable["Score"] = (int)myHashtable["Score"] + score;
+        myHashtable[key] = (int)myHashtable[key] + value;
         // 변경된 해시테이블을 다시 플레이어의 커스텀 프로퍼티로 설정
         PhotonNetwork.LocalPlayer.SetCustomProperties(myHashtable);
+       GetComponent<CharacterAttackAbility>().RefreshWeaponScale();
     }
 
+    public void SetPropertyIntValue(string key, int value)
+    {
+        ExitGames.Client.Photon.Hashtable myHashtable = PhotonNetwork.LocalPlayer.CustomProperties;
+        myHashtable[key] = value;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(myHashtable);
+        GetComponent<CharacterAttackAbility>().RefreshWeaponScale();
+    }
+
+    public int GetPropertyIntValue(string key)
+    {
+        ExitGames.Client.Photon.Hashtable myHashtable = PhotonNetwork.LocalPlayer.CustomProperties;
+        return (int)myHashtable[key];
+    }
 
     private void Update()
     {
@@ -145,11 +163,19 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
 
     private void OnDeath(int actorNumber)
     {
+        _halfScore = GetPropertyIntValue("Score") / 2;
+        SetPropertyIntValue("Score", 0);
+
         if (actorNumber >= 0)
         {
             string nickname = PhotonNetwork.CurrentRoom.GetPlayer(actorNumber).NickName;
             string logMessage = $"\n{nickname}님이 {PhotonView.Owner.NickName}을 처치하였습니다.";
             PhotonView.RPC(nameof(AddLog), RpcTarget.All, logMessage);
+
+            Player targetPlayer = PhotonNetwork.CurrentRoom.GetPlayer(actorNumber);
+            PhotonView.RPC(nameof(AddPropertyIntValue), targetPlayer, "Score", _halfScore);
+
+            PhotonView.RPC(nameof(AddPropertyIntValue), targetPlayer, "KillCount", 1);
         }
         else
         {
@@ -200,10 +226,10 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         if (randomValue > 30)      // 70%
         {
             Debug.Log(randomValue);
-            int randomCount = UnityEngine.Random.Range(10, 30);
+            int randomCount = _halfScore / 30;
             for (int i = 0; i < randomCount; ++i)
             {
-                ItemObjectFactory.Instance.RequestCreate(ItemType.ScorePotion, transform.position);
+                ItemObjectFactory.Instance.RequestCreate(ItemType.ScoreStone100, transform.position);
             }
         }
         else if (randomValue > 10)  // 20%

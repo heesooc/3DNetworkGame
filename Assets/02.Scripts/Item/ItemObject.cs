@@ -61,10 +61,12 @@ public class ItemObject : MonoBehaviourPun // Pun씀
                         }
                         break;
                 }
-                case ItemType.ScorePotion:
+                case ItemType.ScoreStone100:
+                case ItemType.ScoreStone50:
+                case ItemType.ScoreStone30:
                     {
                         // character.Score += Value;
-                        character.AddScore((int)Value);
+                        character.AddPropertyIntValue("Score", (int)Value);
                         break;
                     }
             }

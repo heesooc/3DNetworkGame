@@ -58,7 +58,26 @@ public class ItemSpawner : MonoBehaviour
                 randomPosition += transform.position;   // 랜덤 위치를 기준 위치로부터 결정하기 위함
 
                 // 아이템 오브젝트를 생성하고 리스트에 추가
-                ItemObject itemObject = ItemObjectFactory.Instance.MasterCreate(ItemType.ScorePotion, randomPosition);
+                int random = UnityEngine.Random.Range(0, 22);
+                ItemType itemType = ItemType.ScoreStone30; // 기본 타입
+                switch (random)
+                {
+                    case 9: // 랜덤숫자 '9'일때만
+                        itemType = ItemType.ScoreStone100;
+                        break;
+                    case 8:
+                        itemType = ItemType.ScoreStone50;
+                        break;
+                    case 7:
+                        itemType = ItemType.StaminaPotion;
+                        break;
+                    case 6:
+                        itemType = ItemType.HealthPotion;
+                        break;
+                }
+
+
+                ItemObject itemObject = ItemObjectFactory.Instance.MasterCreate(itemType, randomPosition);
                 _items.Add(itemObject);
                 itemObject.transform.SetParent(transform);  //생성된 아이템은 스포너(transform)의 자식으로 설정됨
             }

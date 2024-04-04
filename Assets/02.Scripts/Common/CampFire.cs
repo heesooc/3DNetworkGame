@@ -7,7 +7,7 @@ using UnityEngine;
 public class CampFire : MonoBehaviour
 {
     public int Damage       = 20;
-    public float Cooltime   = 1f;
+    public float Cooltime   = 0.6f;
     public float _timer    = 0f; // 타이머도 안올라감
 
     private IDamaged _target = null;
@@ -27,6 +27,8 @@ public class CampFire : MonoBehaviour
         }
 
         _target = damagedObject;
+
+        _target.Damaged(Damage, -1);
     }
 
     private void OnTriggerStay(Collider other)
@@ -41,6 +43,15 @@ public class CampFire : MonoBehaviour
         if (_target == null) 
         { 
             return; 
+        }
+
+        if (other.TryGetComponent<Character>(out Character character)) //존재 여부 확인, 변수 직접 할당
+        {
+            if (character.State == State.Death)
+            {
+                _target = null;
+                return;
+            }
         }
 
         _timer += Time.deltaTime;
