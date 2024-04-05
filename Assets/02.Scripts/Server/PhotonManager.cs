@@ -19,7 +19,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         // <전체를 뒤엎을 변화>, <기능 수정, 추가>, <버그, 내부적 코드 수정>
 
         // 2. 닉네임을 설정한다.
-        PhotonNetwork.NickName = $"조희수_{Random.Range(0, 100)}";
+        PhotonNetwork.NickName = $"아이_{Random.Range(0, 100)}";
         // 3. 씬을 설정한다.
         // 4. 연결한다. 
         PhotonNetwork.ConnectUsingSettings();
@@ -70,7 +70,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         roomOptions.MaxPlayers = 20;    // 입장 가능한 최대 플레이어 수
         roomOptions.IsVisible = true;   // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
-        PhotonNetwork.JoinOrCreateRoom("희수월드", roomOptions, TypedLobby.Default); // 방이 있다면 입장하고 없다면 만드는 것
+        PhotonNetwork.JoinOrCreateRoom("단추눈을 원해?", roomOptions, TypedLobby.Default); // 방이 있다면 입장하고 없다면 만드는 것
        // PhotonNetwork.JoinRandomOrCreateRoom(); // 랜덤한 방에 들어가거나 없다면 만드는 것
     }
 
@@ -88,6 +88,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         Debug.Log($"PlayerCount: {PhotonNetwork.CurrentRoom.PlayerCount}");
         Debug.Log($"MaxCount: {PhotonNetwork.CurrentRoom.MaxPlayers}");
 
-        PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
+        GameObject obj = PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
+        CameraManager.Instance.lookAtTarget = obj.transform;
     }
 }

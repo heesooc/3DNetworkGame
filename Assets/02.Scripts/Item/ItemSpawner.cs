@@ -15,8 +15,8 @@ public class ItemSpawner : MonoBehaviour
 
     // - 랜덤 개수 (최소/최대 개수, 확정 개수)
     public float _createCount;
-    public int MinCreateCount = 5;
-    public int MaxCreateCount = 10;
+    public int MinCreateCount = 10;
+    public int MaxCreateCount = 30;
 
     // 생성한 아이템
     public List<ItemObject> _items = new List<ItemObject>();

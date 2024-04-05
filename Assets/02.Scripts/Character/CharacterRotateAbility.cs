@@ -1,9 +1,5 @@
 using Cinemachine;
-using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class CharacterRotateAbility : CharacterAbility
 {
@@ -21,6 +17,7 @@ public class CharacterRotateAbility : CharacterAbility
         if (Owner.PhotonView.IsMine)
         {
             GameObject.FindWithTag("FollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = CameraRoot;
+            //CameraManager.Instance.followCamera.Follow = CameraRoot;
         }
     }
 

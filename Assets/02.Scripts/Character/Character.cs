@@ -1,10 +1,7 @@
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
-using ExitGames.Client.Photon;
 using System.Collections;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
-using UnityEngine.TextCore.Text;
 using Photon.Realtime;
 
 [RequireComponent(typeof(CharacterMoveAbility))]
@@ -219,6 +216,7 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         }
     }
 
+    [PunRPC]
     private void DropItems()
     {
         // 팩토리패턴: 객체 생성과 사용 로직을 분리해서 캡슐화하는 패턴
