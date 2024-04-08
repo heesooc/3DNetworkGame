@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Bear : MonoBehaviour, IPunObservable
+public class Bear : MonoBehaviour, IPunObservable, IDamaged
 {
     // 곰 상태 상수(열거형)
     public enum BearState
@@ -275,7 +275,7 @@ public class Bear : MonoBehaviour, IPunObservable
         _attackTimer += Time.deltaTime;
         if (_attackTimer >= Stat.AttackCoolTime)
         {
-            transform.LookAt(_targetCharacter.transform); // 보는가?? -> 계속 바꿔서 보는데 위치 이상해
+            transform.LookAt(_targetCharacter.transform); 
 
             _attackTimer = 0f;
             RequestPlayAnimation("Attack");
@@ -335,7 +335,7 @@ public class Bear : MonoBehaviour, IPunObservable
     }
 
 
-    public void AttackAction()
+    public void AttackAction() // Attack1 Events - Function에 입력
     {
         if (!PhotonNetwork.IsMasterClient)
         {
@@ -375,5 +375,42 @@ public class Bear : MonoBehaviour, IPunObservable
     {
         List<GameObject> randomPoints = GameObject.FindGameObjectsWithTag("PatrolPoint").ToList();
         PatrolDestination = randomPoints[UnityEngine.Random.Range(0, randomPoints.Count)].transform;
+    }
+
+    [PunRPC]
+    public void Damaged(int damage, int actorNumber)
+    {
+        Debug.Log($"곰이 맞았다!: {actorNumber}");
+
+        if (_state == BearState.Death || !PhotonNetwork.IsMasterClient)
+        {
+            return;
+        }
+
+        Stat.Health -= damage;
+
+        if (Stat.Health <= 0)
+        {
+            Death();
+        }
+        else
+        {
+            PlayAnimation("Hit");
+        }
+    }
+
+    private void Death()
+    {
+        _state = BearState.Death;
+        PlayAnimation("Death");
+
+        // 3초 후 삭제
+        StartCoroutine(Death_Coroutine());
+    }
+
+    private IEnumerator Death_Coroutine()
+    {
+        yield return new WaitForSeconds(3f);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
