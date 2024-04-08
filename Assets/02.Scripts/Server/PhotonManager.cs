@@ -89,6 +89,5 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         Debug.Log($"MaxCount: {PhotonNetwork.CurrentRoom.MaxPlayers}");
 
         GameObject obj = PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
-        CameraManager.Instance.lookAtTarget = obj.transform;
     }
 }

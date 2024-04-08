@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleScene : MonoBehaviour
+public class BattleScene : MonoBehaviourPunCallbacks
 {
     public static BattleScene Instance { get; private set; }
 
@@ -18,4 +19,6 @@ public class BattleScene : MonoBehaviour
         int randomIndex = Random.Range(0, SpawnPoints.Count);
         return SpawnPoints[randomIndex].position;
     }
+
+
 }
