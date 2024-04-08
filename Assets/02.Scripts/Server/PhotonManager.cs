@@ -66,11 +66,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
        // PhotonNetwork.CreateRoom(); // 방을 만드는 것
        // PhotonNetwork.JoinRoom(); // 방에 입장하는 것
        // PhotonNetwork.JoinRandomRoom(); // 랜덤한 방에 입장하는 것
-        RoomOptions roomOptions = new RoomOptions();
+       /* RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 20;    // 입장 가능한 최대 플레이어 수
         roomOptions.IsVisible = true;   // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
-        PhotonNetwork.JoinOrCreateRoom("단추눈을 원해?", roomOptions, TypedLobby.Default); // 방이 있다면 입장하고 없다면 만드는 것
+        PhotonNetwork.JoinOrCreateRoom("단추눈을 원해?", roomOptions, TypedLobby.Default); // 방이 있다면 입장하고 없다면 만드는 것*/
        // PhotonNetwork.JoinRandomOrCreateRoom(); // 랜덤한 방에 들어가거나 없다면 만드는 것
     }
 
@@ -88,6 +88,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서�
         Debug.Log($"PlayerCount: {PhotonNetwork.CurrentRoom.PlayerCount}");
         Debug.Log($"MaxCount: {PhotonNetwork.CurrentRoom.MaxPlayers}");
 
-        GameObject obj = PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
+        //PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
+        PhotonNetwork.LoadLevel("BattleScene");
     }
 }

@@ -1676,6 +1676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CampFire (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.73
@@ -3116,7 +3120,7 @@ GameObject:
   - component: {fileID: 305220547}
   m_Layer: 0
   m_Name: BearSpawnPoint (1)
-  m_TagString: Untagged
+  m_TagString: BearSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3130,7 +3134,7 @@ Transform:
   m_GameObject: {fileID: 305220546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -26.1, y: 0, z: -30.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4471,37 +4475,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92101ed146e7f434cb43a3680c518e75, type: 3}
---- !u!1 &496341498
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 496341499}
-  m_Layer: 0
-  m_Name: BearSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &496341499
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496341498}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.8, y: 0, z: -20.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 747699980}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &498291132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5411,6 +5384,7 @@ MonoBehaviour:
   - {fileID: 1731968605}
   - {fileID: 701257425}
   - {fileID: 800222995}
+  _init: 0
 --- !u!114 &549973586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5649,6 +5623,10 @@ PrefabInstance:
     - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_Name
       value: CampFire (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7609,7 +7587,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 496341499}
   - {fileID: 305220547}
   - {fileID: 1759363365}
   m_Father: {fileID: 0}
@@ -12755,6 +12732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CampFire (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.92
@@ -14760,6 +14741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CampFire (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.1748009
@@ -15041,6 +15026,10 @@ PrefabInstance:
     - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_Name
       value: CampFire (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15443,6 +15432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CampFire (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -15644,6 +15637,10 @@ PrefabInstance:
     - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_Name
       value: CampFire (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16428,7 +16425,7 @@ GameObject:
   - component: {fileID: 1759363365}
   m_Layer: 0
   m_Name: BearSpawnPoint (2)
-  m_TagString: Untagged
+  m_TagString: BearSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17818,6 +17815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CampFire (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.9
@@ -18788,50 +18789,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36f0e139852e2441a08d7ac8d0da120, type: 3}
---- !u!1 &2095241941
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2095241943}
-  - component: {fileID: 2095241942}
-  m_Layer: 0
-  m_Name: PhotonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2095241942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095241941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c883797effcd149b69877de26b751a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2095241943
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095241941}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2095705358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6359112800851487366, guid: c0695e50372965840badd7b84ed57617, type: 3}
@@ -19435,6 +19392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CampFire
       objectReference: {fileID: 0}
+    - target: {fileID: 5733013164889544026, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382731267664626136, guid: 41a7b18d415c77f4c84d748b6e676121, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.1748009
@@ -19572,18 +19533,6 @@ PrefabInstance:
     - target: {fileID: 5000635193465561029, guid: 01ceda97a7c4ccf43ad291e0027081af, type: 3}
       propertyPath: m_Name
       value: PolarBear
-      objectReference: {fileID: 0}
-    - target: {fileID: 5732416811543344361, guid: 01ceda97a7c4ccf43ad291e0027081af, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7490822017527359036, guid: 01ceda97a7c4ccf43ad291e0027081af, type: 3}
-      propertyPath: Stat.Damage
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7490822017527359036, guid: 01ceda97a7c4ccf43ad291e0027081af, type: 3}
-      propertyPath: AttackDistance
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7490822017527359036, guid: 01ceda97a7c4ccf43ad291e0027081af, type: 3}
       propertyPath: PatrolDestination
@@ -24452,7 +24401,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
-  - {fileID: 2095241943}
   - {fileID: 1691356070}
   - {fileID: 1566594748}
   - {fileID: 1788226075}

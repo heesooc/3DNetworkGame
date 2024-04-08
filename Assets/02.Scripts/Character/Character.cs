@@ -29,7 +29,10 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
         Stat.Init();
         PhotonView = GetComponent<PhotonView>();
         _animator = GetComponent<Animator>();
+    }
 
+    private void Start()
+    {
         if (PhotonView.IsMine)
         {
             UI_CharacterStat.Instance.MyCharacter = this;
@@ -42,11 +45,8 @@ public class Character : MonoBehaviour, IPunObservable, IDamaged // 인터페이
                 minimapCamera.SetTarget(transform);
             }
         }
-    }
 
-    private void Start()
-    {
-        if(!PhotonView.IsMine)
+        if (!PhotonView.IsMine)
         {
             return;
         }
