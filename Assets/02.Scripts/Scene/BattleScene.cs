@@ -41,7 +41,9 @@ public class BattleScene : MonoBehaviourPunCallbacks
     {
         _init = true;
 
-        PhotonNetwork.Instantiate(nameof(Character), Vector3.zero, Quaternion.identity);
+        // Character_Male <- 리소스에 넣어줄 이름
+        // Character_Female
+        PhotonNetwork.Instantiate($"Character_{UI_Lobby.SelectedCharacterType}", Vector3.zero, Quaternion.identity);
 
         if (!PhotonNetwork.IsMasterClient)
         {
